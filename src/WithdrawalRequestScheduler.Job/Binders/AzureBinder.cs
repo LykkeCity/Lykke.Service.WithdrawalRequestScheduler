@@ -14,7 +14,7 @@ namespace WithdrawalRequestScheduler.Job.Binders
     {
         public const string DefaultConnectionString = "UseDevelopmentStorage=true";
 
-        public ContainerBuilder Bind(AppSettings settings)
+        public ContainerBuilder Bind(WithdrawalRequestSchedulerSettings settings)
         {
             var logToTable = new LogToTable(new AzureTableStorage<LogEntity>(settings.LogsConnString, "LogWithdrawalRequestSchedulerError", null),
                                             new AzureTableStorage<LogEntity>(settings.LogsConnString, "LogWithdrawalRequestSchedulerWarning", null),
@@ -29,7 +29,7 @@ namespace WithdrawalRequestScheduler.Job.Binders
             return ioc;
         }
 
-        private void InitContainer(ContainerBuilder ioc, AppSettings settings, ILog log)
+        private void InitContainer(ContainerBuilder ioc, WithdrawalRequestSchedulerSettings settings, ILog log)
         {
 #if DEBUG
             log.WriteInfoAsync("WithdrawalRequestScheduler.Job", "App start", null, $"AppSettings : {settings.ToJson()}").Wait();
@@ -38,8 +38,9 @@ namespace WithdrawalRequestScheduler.Job.Binders
 #endif
             ioc.RegisterInstance(log);
             ioc.RegisterInstance(settings);
-            ioc.RegisterType<CashOutAttemptRepository>().SingleInstance();
             
+            ioc.RegisterInstance(new CashOutAttemptRepository(new AzureTableStorage<CashOutBaseEntity>(settings.CashOutAttemptConnString, "CashOutAttempt", log)));
+
             ioc.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
         }
     }

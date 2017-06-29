@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WithdrawalRequestScheduler.Job": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SettingsUrl": "https://settings-dev.lykkex.net/xJNaS5XHZg6DfuUccyKfNcSiiIPMzM1E_WithdrawalRequestScheduler"
+      }
+    }
+  }
+}

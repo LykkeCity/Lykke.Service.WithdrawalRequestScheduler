@@ -6,7 +6,6 @@ namespace WithdrawalRequestScheduler.Job
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             var host = new AppHost();
             host.Run();
         }
