@@ -1,8 +1,7 @@
 version: '2'
 
 services:
-  web:
-    image: web
-    build:
-      context: ./src/Web
-      dockerfile: Dockerfile
+  apirunner:
+    image: 
+    environment:
+     - 
