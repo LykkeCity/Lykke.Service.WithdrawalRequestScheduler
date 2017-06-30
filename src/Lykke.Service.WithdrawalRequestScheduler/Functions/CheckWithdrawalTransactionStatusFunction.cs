@@ -44,7 +44,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Functions
 
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
-        [TimerTrigger("00:01:00")]
+        [TimerTrigger("00:10:00")]
         public async Task Process()
         {
             try
