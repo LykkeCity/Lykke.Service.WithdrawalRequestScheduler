@@ -4,11 +4,11 @@ using System.Text;
 using Autofac;
 using Autofac.Features.ResolveAnything;
 using AzureStorage.Tables;
-using WithdrawalRequestScheduler.Job.Repositories;
+using Lykke.Service.WithdrawalRequestScheduler.Repositories;
 using Common.Log;
 using Common;
 
-namespace WithdrawalRequestScheduler.Job.Binders
+namespace Lykke.Service.WithdrawalRequestScheduler.Binders
 {
     public class AzureBinder
     {

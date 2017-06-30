@@ -7,11 +7,11 @@ using System.Runtime.Loader;
 using System.Reflection;
 using System.Threading;
 using System.Net.Http;
-using WithdrawalRequestScheduler.Job.Binders;
+using Lykke.Service.WithdrawalRequestScheduler.Binders;
 using Lykke.JobTriggers.Triggers;
 using Autofac.Extensions.DependencyInjection;
 
-namespace WithdrawalRequestScheduler.Job
+namespace Lykke.Service.WithdrawalRequestScheduler
 {
     public class AppHost
     {

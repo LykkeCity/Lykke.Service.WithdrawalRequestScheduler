@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WithdrawalRequestScheduler.Job
+namespace Lykke.Service.WithdrawalRequestScheduler
 {
     class Program
     {

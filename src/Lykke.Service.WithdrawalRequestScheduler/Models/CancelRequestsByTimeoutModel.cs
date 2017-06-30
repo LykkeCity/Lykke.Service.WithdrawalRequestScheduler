@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WithdrawalRequestScheduler.Job.Models
+namespace Lykke.Service.WithdrawalRequestScheduler.Models
 {
     public class CancelRequestsByTimeoutModel
     {

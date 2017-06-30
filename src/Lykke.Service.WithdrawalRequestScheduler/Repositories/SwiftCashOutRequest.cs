@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WithdrawalRequestScheduler.Job.Repositories
+namespace Lykke.Service.WithdrawalRequestScheduler.Repositories
 {
     public enum CashOutRequestStatus
     {

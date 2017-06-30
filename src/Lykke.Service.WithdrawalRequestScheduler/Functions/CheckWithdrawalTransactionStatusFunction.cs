@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WithdrawalRequestScheduler.Job.Repositories;
 using System.Net.Http;
 using System.Net;
 using Common.Log;
 using Common;
 using Newtonsoft.Json;
-using WithdrawalRequestScheduler.Job.Models;
+using Lykke.Service.WithdrawalRequestScheduler.Repositories;
+using Lykke.Service.WithdrawalRequestScheduler.Models;
 
-namespace WithdrawalRequestScheduler.Job.Functions
+namespace Lykke.Service.WithdrawalRequestScheduler.Functions
 {
     public class CheckWithdrawalTransactionStatusFunction
     {
@@ -44,7 +44,7 @@ namespace WithdrawalRequestScheduler.Job.Functions
 
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
-        [TimerTrigger("00:10:00")]
+        [TimerTrigger("00:01:00")]
         public async Task Process()
         {
             try

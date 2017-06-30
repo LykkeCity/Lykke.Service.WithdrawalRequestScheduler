@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WithdrawalRequestScheduler.Job.Repositories
+namespace Lykke.Service.WithdrawalRequestScheduler.Repositories
 {
     public class LogToTableAndConsole : ILog
     {
