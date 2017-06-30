@@ -96,7 +96,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Functions
                         _responseContent = string.Empty;
                     }
 
-                    await _log.WriteErrorAsync("CheckWithdrawalTransactionStatusFunction", "API Request", (new { URL = _url, Body = _requestContent, Response = _responseContent }).ToJson(), null);
+                    await _log.WriteWarningAsync("CheckWithdrawalTransactionStatusFunction", "API Request", (new { URL = _url, Body = _requestContent, Response = _responseContent }).ToJson(), null);
                 }
             }
             catch(Exception ex)
