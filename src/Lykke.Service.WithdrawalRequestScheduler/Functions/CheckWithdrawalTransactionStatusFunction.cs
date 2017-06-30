@@ -53,7 +53,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Functions
 
                 var transactions = await _cashOutAttemptRepository.GetAllAttempts();
                 var expiredTransactions = transactions
-                            .Where(tr => tr.Status == CashOutRequestStatus.ClientConfirmation && tr.DateTime < expirationDate)
+                            .Where(tr => tr.Status == CashOutRequestStatus.ClientConfirmation && tr.DateTime.HasValue && tr.DateTime < expirationDate)
                             .ToList();
 
                 if (expiredTransactions.Count == 0)

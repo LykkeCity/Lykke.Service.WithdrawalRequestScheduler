@@ -27,7 +27,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Repositories
         }
 
         public double Amount { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime? DateTime { get; set; }
         public bool IsHidden { get; set; }
 
         public int StatusVal { get; set; }

@@ -39,7 +39,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Binders
             ioc.RegisterInstance(log);
             ioc.RegisterInstance(settings);
             
-            ioc.RegisterInstance(new CashOutAttemptRepository(new AzureTableStorage<CashOutBaseEntity>(settings.CashOutAttemptConnString, "CashOutAttempt", log)));
+            ioc.RegisterInstance(new CashOutAttemptRepository(new AzureTableStorage<CashOutBaseEntity>(settings.CashOutAttemptConnString, "CashOutAttempt", log), log));
 
             ioc.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
         }

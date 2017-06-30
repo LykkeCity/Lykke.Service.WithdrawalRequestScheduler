@@ -1,4 +1,5 @@
 ﻿using AzureStorage;
+using Common.Log;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,13 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Repositories
 
     public class CashOutAttemptRepository
     {
-        readonly INoSQLTableStorage<CashOutBaseEntity> _tableStorage;
+        private readonly INoSQLTableStorage<CashOutBaseEntity> _tableStorage;
+        private readonly ILog _log;
 
-        public CashOutAttemptRepository(INoSQLTableStorage<CashOutBaseEntity> tableStorage)
+        public CashOutAttemptRepository(INoSQLTableStorage<CashOutBaseEntity> tableStorage, ILog log)
         {
             _tableStorage = tableStorage;
+            _log = log;
         }
 
         public static string GeneratePartition(string clientId)
@@ -22,29 +25,17 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Repositories
             return clientId;
         }
 
-        public async Task<CashOutBaseEntity> GetAsync(string clientId, string requestId)
-        {
-            return await _tableStorage.GetDataAsync(clientId, requestId);
-        }
-
         public async Task<IEnumerable<CashOutBaseEntity>> GetAllAttempts()
         {
-            return await _tableStorage.GetDataAsync();
-        }
-
-        public async Task<CashOutBaseEntity> SetCanceledByClient(string clientId, string requestId)
-        {
-            return await ChangeStatus(clientId, requestId, CashOutRequestStatus.CanceledByClient);
-        }
-
-        private async Task<CashOutBaseEntity> ChangeStatus(string clientId, string requestId, CashOutRequestStatus status)
-        {
-            var entity = await _tableStorage.DeleteAsync(clientId, requestId);
-
-            entity.PartitionKey = "Processed";
-            entity.Status = status;
-
-            return await _tableStorage.InsertAndGenerateRowKeyAsDateTimeAsync(entity, entity.DateTime);
+            try
+            {
+                return await _tableStorage.GetDataAsync();
+            }
+            catch (Exception ex)
+            {
+                await _log.WriteFatalErrorAsync("Lykke.Service.WithdrawalRequestScheduler.CashOutAttemptRepository", "GetAllAttempts", null, ex);
+                return new List<CashOutBaseEntity>(0);
+            }
         }
     }
 }
