@@ -64,20 +64,18 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Functions
                 };
 
                 var apiHost = _settings.ApiHost;
-
-                var _url = new Uri(new System.Uri(apiHost + (apiHost.EndsWith("/") ? "" : "/")), "api/CashOutSwiftRequest/CancelRequestsByTimeout").ToString();
-
+                
                 // Create HTTP transport objects
                 var _httpRequest = new HttpRequestMessage();
                 HttpResponseMessage _httpResponse = null;
                 _httpRequest.Method = HttpMethod.Post;
-                _httpRequest.RequestUri = new Uri(_url);
+                _httpRequest.RequestUri = new Uri(new System.Uri(apiHost + (apiHost.EndsWith("/") ? "" : "/")), "api/CashOutSwiftRequest/CancelRequestsByTimeout");
 
                 // Serialize Request
                 string _requestContent = null;
                 
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(requestBody, this.SerializationSettings);
-                _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
 
                 // Send Request
@@ -96,7 +94,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Functions
                         _responseContent = string.Empty;
                     }
 
-                    await _log.WriteWarningAsync("CheckWithdrawalTransactionStatusFunction", "API Request", (new { URL = _url, Body = _requestContent, Response = _responseContent }).ToJson(), null);
+                    await _log.WriteWarningAsync("CheckWithdrawalTransactionStatusFunction", "API Request", (new { URL = _httpRequest.RequestUri.ToString(), Body = _requestContent, Response = _responseContent }).ToJson(), null);
                 }
             }
             catch(Exception ex)
