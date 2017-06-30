@@ -63,11 +63,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Functions
                     RequestsToCancel = expiredTransactions.Select(tr => new KeyValuePair<string, string>(tr.ClientId, tr.Id)).ToList()
                 };
 
-#if DEBUG
-                var apiHost = "http://localhost:5000";
-#else
                 var apiHost = _settings.ApiHost;
-#endif
 
                 var _url = new Uri(new System.Uri(apiHost + (apiHost.EndsWith("/") ? "" : "/")), "api/CashOutSwiftRequest/CancelRequestsByTimeout").ToString();
 
