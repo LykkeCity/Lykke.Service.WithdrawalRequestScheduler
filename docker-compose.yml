@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  apirunner:
-    image: 
+  WithdrawalRequestSchedulerJob:
+    image: lykkex/withdrawalrequestscheduler:Dev
     environment:
-     - 
+     - SettingsUrl=https://settings-dev.lykkex.net/xJNaS5XHZg6DfuUccyKfNcSiiIPMzM1E_WithdrawalRequestScheduler
