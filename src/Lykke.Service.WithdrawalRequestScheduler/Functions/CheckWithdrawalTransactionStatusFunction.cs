@@ -70,7 +70,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Functions
                 // Create HTTP transport objects
                 var _httpRequest = new HttpRequestMessage();
                 HttpResponseMessage _httpResponse = null;
-                _httpRequest.Method = new HttpMethod("POST");
+                _httpRequest.Method = HttpMethod.Post;
                 _httpRequest.RequestUri = new Uri(_url);
 
                 // Serialize Request
@@ -96,7 +96,7 @@ namespace Lykke.Service.WithdrawalRequestScheduler.Functions
                         _responseContent = string.Empty;
                     }
 
-                    await _log.WriteErrorAsync("CheckWithdrawalTransactionStatusFunction", "API Request", (new { URL = _url, Body = _requestContent }).ToJson(), null);
+                    await _log.WriteErrorAsync("CheckWithdrawalTransactionStatusFunction", "API Request", (new { URL = _url, Body = _requestContent, Response = _responseContent }).ToJson(), null);
                 }
             }
             catch(Exception ex)
